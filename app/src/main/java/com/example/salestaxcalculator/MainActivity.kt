@@ -177,12 +177,12 @@ fun Total(text: String = "0.00") { // Sales Tax Calculation
             Row(
                 horizontalArrangement = Arrangement.Start
             ) {
-                Text("Total",
+                Text("Tax",
                     textAlign = TextAlign.Center,
                     fontSize = 32.sp,
                 )
 
-                Spacer(modifier = Modifier.width(75.dp))
+                Spacer(modifier = Modifier.width(96.dp))
 
 
                 Text(text = "$%.2f".format(tax),
@@ -192,12 +192,13 @@ fun Total(text: String = "0.00") { // Sales Tax Calculation
             }
 
             Row(horizontalArrangement = Arrangement.Start) {
-                Text("Tax",
+
+                Text("Total",
                     textAlign = TextAlign.Center,
                     fontSize = 32.sp,
                 )
 
-                Spacer(modifier = Modifier.width(96.dp))
+                Spacer(modifier = Modifier.width(75.dp))
 
                 Text(text = "$%.2f".format(total),
                     textAlign = TextAlign.Center,
