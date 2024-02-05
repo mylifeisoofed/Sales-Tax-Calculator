@@ -11,3 +11,4 @@ It currently only applies Washington state sales tax ( will add other states soo
 TODO:
 - Implement a selection option for users to select states that have sales taxes.
 - Maybe look for an API to hook up to grab up-to-date data for each state's sales tax.
+- Give the app a cool name(?)
