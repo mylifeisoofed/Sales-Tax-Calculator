@@ -4,7 +4,7 @@ This is a simple state sales tax calculator app I made in Android Studio written
 
 Simply enter the price tag and the app will calculate the tax and total after applying sales tax.
 
-<img src="[https://your-image-url.type](https://github.com/mylifeisoofed/Sales-Tax-Calculator/assets/58831022/6b1bc238-ba97-4355-a162-16250fdf3a0f)" width="100">
+<img src="https://your-image-url.type](https://github.com/mylifeisoofed/Sales-Tax-Calculator/assets/58831022/6b1bc238-ba97-4355-a162-16250fdf3a0f" width="400">
 
 TODO:
 - Implement a selection option for users to select states that have sales taxes.
