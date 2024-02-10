@@ -16,7 +16,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExposedDropdownMenuBox
+import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
@@ -29,6 +32,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -61,6 +65,15 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
+//@Preview(showBackground = true)
+@Composable
+fun SalesTaxPreview() {
+    SalesTaxCalculatorTheme {
+        Price()
+    }
+}
+
 
 @Composable
 fun Credits() {
@@ -97,7 +110,7 @@ fun SmallTopAppBar() {
 fun Price(modifier: Modifier = Modifier) { // Text Input for Price
     Column(
         modifier = Modifier.padding(16.dp),
-        verticalArrangement = Arrangement.SpaceAround,
+        verticalArrangement = Arrangement.SpaceEvenly,
         horizontalAlignment = Alignment.CenterHorizontally,
 
         ) {
@@ -112,53 +125,106 @@ fun Price(modifier: Modifier = Modifier) { // Text Input for Price
             },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
         )
-        StateOption()
-        Total(text)
+        StateOption(text)
+        //Total(text)
     }
 }
 
 
-//@Preview(showBackground = true)
-@Composable
-fun SalesTaxPreview() {
-    SalesTaxCalculatorTheme {
-        Price()
-    }
-}
 
-//@Preview(showBackground = true)
+@OptIn(ExperimentalMaterial3Api::class)
+@Preview(showBackground = true)
 @Composable
-fun StateOption() { // State Option
+fun StateOption(text: String = "0.00"){ // State Option
     Surface(
         modifier = Modifier.fillMaxWidth(),
         color = MaterialTheme.colorScheme.background
     ) {
-        Row(
+        Column(
             modifier = Modifier,
-            horizontalArrangement = Arrangement.Start
+            verticalArrangement = Arrangement.SpaceEvenly,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            /*
             Text(
                 "State",
                 textAlign = TextAlign.Center,
                 fontSize = 32.sp,
-            )
-            Spacer(modifier = Modifier.width(68.dp))
+            )*/
+            //Spacer(modifier = Modifier.width(68.dp))
+            /*
             Text(
                 "WA 6.5%",
                 textAlign = TextAlign.Center,
                 fontSize = 32.sp,
             )
+            */
+            /*
+
+            OutlinedTextField(value = state,
+                onValueChange = {state = it},
+                label = { Text("State")},
+                modifier = Modifier,
+                )
+                */
+
+             // This is the new dropdown menu State selection Field.
+            val taxRates = mapOf(
+                "No Sales Taxes" to "0.0",
+                "Washington 6.5%" to "6.5",
+                "Arizona 5.6%" to "5.6",
+                "California 6%" to "6.0",
+                "Arkansas 6.5%" to "6.5",
+                )
+
+            val stateOptions = taxRates.keys.toList()
+            var expanded by remember { mutableStateOf(false)}
+            var selectedStateOption by remember { mutableStateOf(stateOptions[0]) }
+            var selectedTaxRates by remember { mutableStateOf(taxRates[selectedStateOption])}
+            ExposedDropdownMenuBox(expanded = expanded,
+                onExpandedChange = { expanded = it},
+
+            ) {
+                OutlinedTextField(
+                    readOnly = true,
+                    value = selectedStateOption,
+                    onValueChange = {},
+                    label = {Text("State")},
+                    trailingIcon = {
+                        ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
+                    },
+                    modifier = Modifier.menuAnchor(),
+                    keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done)
+                )
+
+                ExposedDropdownMenu(expanded = expanded,
+                    onDismissRequest = { expanded = false }
+                ) {
+                    stateOptions.forEach { selectionOption ->
+                        DropdownMenuItem(
+                            text = { Text(text = selectionOption) },
+                            onClick = {
+                                selectedStateOption = selectionOption
+                                selectedTaxRates = taxRates[selectionOption] ?: "0.0"
+                                expanded = false
+                            },
+                        )
+                    }
+                }
+            }
+            Spacer(modifier = Modifier.height(100.dp))
+            Total(text, selectedTaxRates.toString())
         }
     }
 }
 
 
-@Preview(showBackground = true)
+//@Preview(showBackground = false)
 @Composable
-fun Total(text: String = "0.00") { // Sales Tax Calculation
+fun Total(text: String = "0.00", tax: String = "0.0") { // Sales Tax Calculation
     val input = text
     var total = 0.00
-    var tax = 0.00
+    var tax = tax.toDouble()
     Surface (
         modifier = Modifier.fillMaxWidth()
     ){
@@ -168,7 +234,7 @@ fun Total(text: String = "0.00") { // Sales Tax Calculation
         }
         else
         {
-            tax = (input.toDouble() * (6.5 / 100))
+            tax = (input.toDouble() * (tax / 100))
             total = input.toDouble() + tax
         }
 
@@ -178,7 +244,7 @@ fun Total(text: String = "0.00") { // Sales Tax Calculation
                 horizontalArrangement = Arrangement.Start
             ) {
                 Text("Tax",
-                    textAlign = TextAlign.Center,
+                    textAlign = TextAlign.Start,
                     fontSize = 32.sp,
                 )
 
@@ -186,7 +252,7 @@ fun Total(text: String = "0.00") { // Sales Tax Calculation
 
 
                 Text(text = "$%.2f".format(tax),
-                    textAlign = TextAlign.Center,
+                    textAlign = TextAlign.Start,
                     fontSize = 32.sp,
                 )
             }
@@ -213,10 +279,10 @@ fun Total(text: String = "0.00") { // Sales Tax Calculation
 fun isDecimal(text: String): Boolean { // have to create my own decimal check via exception handling.
     try{
         text.toDouble()
-        return true
     }
     catch(e: NumberFormatException){
         return false
     }
+    return true
 }
 
