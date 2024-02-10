@@ -227,6 +227,7 @@ fun Total(text: String = "0.00", tax: String = "0.0") { // Sales Tax Calculation
     val input = text
     var total = 0.00
     var tax = tax.toDouble()
+    var taxTotal = 0.0
     Surface (
         modifier = Modifier.fillMaxWidth()
     ){
@@ -236,7 +237,7 @@ fun Total(text: String = "0.00", tax: String = "0.0") { // Sales Tax Calculation
         }
         else
         {
-            tax = (input.toDouble() * (tax / 100))
+            taxTotal = (input.toDouble() * (tax / 100))
             total = input.toDouble() + tax
         }
 
@@ -253,7 +254,7 @@ fun Total(text: String = "0.00", tax: String = "0.0") { // Sales Tax Calculation
                 Spacer(modifier = Modifier.width(96.dp))
 
 
-                Text(text = "$%.2f".format(tax),
+                Text(text = "$%.2f".format(taxTotal),
                     textAlign = TextAlign.Start,
                     fontSize = 32.sp,
                 )
