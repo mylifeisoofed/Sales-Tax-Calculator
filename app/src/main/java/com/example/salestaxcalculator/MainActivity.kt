@@ -169,6 +169,7 @@ fun StateOption(text: String = "0.00"){ // State Option
                 */
 
              // This is the new dropdown menu State selection Field.
+            // TODO: get an api to do this for me
             val taxRates = mapOf(
                 "No Sales Taxes" to "0.0",
                 "Washington 6.5%" to "6.5",
