@@ -4,7 +4,7 @@ This is a simple state sales tax calculator app I made in Android Studio written
 
 Simply enter the price tag and the app will calculate the tax and total after applying sales tax. 
 
-DISCLAIMER: This app is not guaranteed to be 100% accurate in calculating your product's total after tax. Local jurisdictions (cities and counties) can impose additional state and local taxes in addition to the sales taxes, leading to varying total rates.
+DISCLAIMER: This app is not guaranteed to be 100% accurate in calculating your product's total after tax. Local jurisdictions (cities and counties) can impose additional state and local taxes in addition to the sales taxes, leading to varying total rates. This app does not take into account Local and other taxes (like VAT or Excise Taxes).
 
 ** Currently, only a few states have been added ( will add other states soon ^_^ )
 
