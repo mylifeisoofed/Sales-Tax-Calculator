@@ -56,11 +56,12 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    SalesTaxPreview() // the sales tax stuff
+                    SalesTax() // the sales tax stuff
                     Credits()
                 }
 
                 SmallTopAppBar() // has to be outside of surface idk why
+                // learned about the use of scaffolding. Might try to utilize it.
             }
         }
     }
@@ -68,7 +69,7 @@ class MainActivity : ComponentActivity() {
 
 //@Preview(showBackground = true)
 @Composable
-fun SalesTaxPreview() {
+fun SalesTax() {
     SalesTaxCalculatorTheme {
         Price()
     }
