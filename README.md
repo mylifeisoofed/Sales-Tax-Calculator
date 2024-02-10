@@ -1,4 +1,4 @@
-## Sales Tax Calculator APP
+## Sales Tax Calculator Android App
 
 This is a simple state sales tax calculator app I made in Android Studio written in Kotlin utilizing Jetpack Compose.
 
