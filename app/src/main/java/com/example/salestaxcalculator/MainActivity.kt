@@ -51,9 +51,11 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.lang.NumberFormatException
+import com.example.salestaxcalculator.*
+
 
 var url = "https://api.api-ninjas.com/"
-private val apikey = "" // api key goes here.
+//private val apikey = "aB3qaWuMIr77sdagi1V1mm0co7ucTIWAWLkIlrk3" // api key goes here.
 
 class MainActivity : ComponentActivity() {
 
@@ -213,55 +215,6 @@ fun StateOption(price: String = "0.00"){ // State Option and Sales Tax Calculati
             verticalArrangement = Arrangement.SpaceEvenly,
             horizontalAlignment = Alignment.Start
         ) {
-
-            // Warning, very loooooong list. Should probably put this in another Kotlin file later.
-            val taxRates = mapOf(
-                "No Sales Taxes" to "0.0",
-                "Arizona 5.6%" to ".056",
-                "Arkansas 6.5%" to ".065",
-                "California 6%" to ".060",
-                "Colorado 6%" to "0.06",
-                "Connecticut 6.35%" to "0.0635",
-                "Florida 6%" to "0.06",
-                "Georgia 4%" to "0.04",
-                "Hawaii 4%" to "0.04",
-                "Idaho 4%" to "0.04",
-                "Illinois 6.25%" to "0.0625",
-                "Indiana 7%" to "0.07",
-                "Iowa 6%" to "0.06",
-                "Kansas 6.5%" to "0.065",
-                "Kentucky 6%" to "0.06",
-                "Louisiana 4.45%" to "0.0445",
-                "Maine 5.5%" to "0.055",
-                "Maryland 6%" to "0.06",
-                "Massachusetts 5.6%" to "0.056",
-                "Michigan 6%" to "0.06",
-                "Minnesota 6.88%" to "0.0688",
-                "Mississippi 7%" to "0.07",
-                "Missouri 4.23%" to "0.0423",
-                "Nebraska 5.5%" to "0.055",
-                "Nevada 4.6%" to "0.046",
-                "New Jersey 6.63%" to "0.0663",
-                "New Mexico 5.13%" to "0.0513",
-                "New York 4%" to "0.04",
-                "North Carolina 4.75%" to "0.0475",
-                "North Dakota 5%" to "0.05",
-                "Ohio 5.75%" to "0.0575",
-                "Oklahoma 4.5%" to "0.045",
-                "Pennsylvania 6%" to "0.06",
-                "Rhode Island 7%" to "0.07",
-                "South Carolina 6%" to "0.06",
-                "South Dakota 4.5%" to "0.045",
-                "Tennessee 7%" to "0.07",
-                "Texas 6.25%" to "0.065",
-                "Utah 4.7%" to "0.047",
-                "Vermont 6%" to "0.06",
-                "Virgina 4.3%" to "0.043",
-                "Washington 6.5%" to "0.065",
-                "West Virginia 6%" to "0.06",
-                "Wisconsin 5%" to "0.05",
-                "Wyoming 4%" to "0.04",
-                )
 
             val stateOptions = taxRates.keys.toList()
             var expanded by remember { mutableStateOf(false)}
