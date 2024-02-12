@@ -53,7 +53,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.lang.NumberFormatException
 
 var url = "https://api.api-ninjas.com/"
-private val apikey = "0/xIel8AZsKs9dkoSCe8rQ==x6SdeC0TTzy1eHWU" // api key goes here.
+private val apikey = "" // api key goes here.
 
 class MainActivity : ComponentActivity() {
 
