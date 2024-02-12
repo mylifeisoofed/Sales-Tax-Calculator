@@ -1,6 +1,6 @@
 package com.example.salestaxcalculator
 
-// Warning, very loooooong list. These list are up to date as of 2/11/2024
+// Warning, very loooooong list. These list are up to date as of 2/11/2024.
 val taxRates = mapOf(
     "No Sales Taxes" to "0.0",
     "Arizona 5.6%" to ".056",
