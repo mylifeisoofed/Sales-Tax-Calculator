@@ -13,4 +13,4 @@
 .externalNativeBuild
 .cxx
 local.properties
-*.kt
+app/src/main/java/com/example/salestaxcalculator/APIKey.kt
