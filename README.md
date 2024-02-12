@@ -1,14 +1,17 @@
-## Sales Tax Calculator APP
+## Sales Tax Calculator Android App
 
 This is a simple state sales tax calculator app I made in Android Studio written in Kotlin utilizing Jetpack Compose.
 
-Simply enter the price tag and the app will calculate the tax and total after applying sales tax.
-It currently only applies Washington state sales tax ( will add other states soon ^_^ )
+Simply enter the price tag and the app will calculate the tax and total after applying sales tax. 
 
-<img src="https://github.com/mylifeisoofed/Sales-Tax-Calculator/assets/58831022/a337e371-1958-41a2-b16c-63377b2296cd" width="400">
+DISCLAIMER: This app is not guaranteed to be 100% accurate in calculating your product's total after tax. Local jurisdictions (cities and counties) can impose additional state and local taxes in addition to the sales taxes, leading to varying total rates. This app does not take into account Local and other taxes (like VAT or Excise Taxes).
+
+** Currently, only a few states have been added ( will add other states soon ^_^ )
+
+<img src="https://github.com/mylifeisoofed/Sales-Tax-Calculator/assets/58831022/75ffb0e6-1dae-47c0-b657-ab1f0efe90e9" width="400">
 
 TODO:
-- Implement a selection option for users to select states that have sales taxes.
+- ~~Implement a selection option for users to select states that have sales taxes.~~
 - Maybe look for an API to hook up to grab up-to-date data for each state's sales tax.
 - Make UI look better(?)
 - Give the app a cool name(?)
