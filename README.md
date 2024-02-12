@@ -8,7 +8,7 @@ DISCLAIMER: This app is not guaranteed to be 100% accurate in calculating your p
 
 ** Currently, only a few states have been added ( will add other states soon ^_^ )
 
-<img src="https://github.com/mylifeisoofed/Sales-Tax-Calculator/assets/58831022/75ffb0e6-1dae-47c0-b657-ab1f0efe90e9" width="400">
+<img src="https://github.com/mylifeisoofed/Sales-Tax-Calculator/assets/58831022/ac4be57b-790d-4d69-b241-ce59ed9e864a" width="400">
 
 TODO:
 - ~~Implement a selection option for users to select states that have sales taxes.~~
