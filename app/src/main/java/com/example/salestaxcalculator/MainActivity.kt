@@ -55,7 +55,7 @@ import com.example.salestaxcalculator.*
 
 
 var url = "https://api.api-ninjas.com/"
-//private val apikey = "aB3qaWuMIr77sdagi1V1mm0co7ucTIWAWLkIlrk3" // api key goes here.
+
 
 class MainActivity : ComponentActivity() {
 
