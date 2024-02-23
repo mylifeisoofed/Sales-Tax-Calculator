@@ -7,10 +7,10 @@ If you ever go grocery shopping and want to figure out how much you will be payi
 
 **DISCLAIMER:** This app is not guaranteed to be 100% accurate in calculating your product's total after taxes. Local jurisdictions (cities and counties) can impose and change additional state and local taxes in addition to the sales taxes, leading to varying total rates. See below for more info.
 
-### Zip Code Option
+## Zip Code Option
 **The Zip Code Option is the most accurate and up-to-date method to calculate your total after taxes.** It uses an API to fetch up-to-date sales taxes, including local and other additional taxes. When doing tax calculations, the zip code option will use the total tax (state tax + local tax + county tax + additional taxes) to calculate your total. Therefore, It is recommended to use the Zip code Option to accurately calculate your total after taxes.  
 
-### State Dropdown Selection Option
+## State Dropdown Selection Option
 **The US State Selection Option does not take into account Local and other taxes that are added to state taxes and should be used to approximate your total.**
 
 
