@@ -11,8 +11,11 @@ If you ever go grocery shopping and want to figure out how much you will be payi
 **The Zip Code Option is the most accurate and up-to-date method to calculate your total after taxes.** It uses an API to fetch up-to-date sales taxes, including local and other additional taxes. When doing tax calculations, the zip code option will use the total tax (state tax + local tax + county tax + additional taxes) to calculate your total. Therefore, It is recommended to use the Zip code Option to accurately calculate your total after taxes.  
 
 ## State Dropdown Selection Option
-**The US State Selection Option does not take into account Local and other taxes that are added to state taxes and should be used to approximate your total.**
-
+**The US State Selection Option does not take into account Local and other taxes that are added to state taxes and should be used to approximate your total.**  
+  
+  
+*So then why keep both options?*  
+The zip code option requires an internet connection (either through wifi or mobile data) while the US State Option does not. Therefore, if you do not have an internet connection, then the option to approximate your sales taxes is available for you. If you do have connection, it is highly recommended to use the zip code option.
 
 The API used to get sales tax data: https://api-ninjas.com/api/salestax  
 
