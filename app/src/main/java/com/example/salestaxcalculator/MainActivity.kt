@@ -92,6 +92,7 @@ class MainActivity : ComponentActivity() {
 
 // This is the API Call to get sales taxes.
 // Check the Retrofit API Documentations
+
 fun getTaxes(zipcode: String, callback: (String) -> Unit) {
     val api = Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create())
@@ -183,6 +184,7 @@ fun Price(modifier: Modifier = Modifier) { // Text Input for Price and will call
 
         ) {
         var text by remember { mutableStateOf("")} // user inputs price
+        var discount by remember { mutableStateOf("")} // for discount
         OutlinedTextField(
             value = text,
             onValueChange = { text = it },
@@ -193,8 +195,19 @@ fun Price(modifier: Modifier = Modifier) { // Text Input for Price and will call
             },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
         )
+        Spacer(modifier = Modifier.height(25.dp))
+        OutlinedTextField(value = discount,
+            onValueChange = { discount = it },
+            modifier = Modifier,
+            label = { Text("Discount (Enter the %)") },
+            singleLine = true,
+            keyboardActions = KeyboardActions(onDone = null){
+                Log.i("DISCOUNT", text)
+            },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+        )
         Spacer(modifier = Modifier.height(100.dp))
-        StateOption(text)
+        StateOption(text, discount)
         //Total(text)
         Log.i("PRICE", text)
     }
@@ -205,7 +218,7 @@ fun Price(modifier: Modifier = Modifier) { // Text Input for Price and will call
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Preview(showBackground = true)
 @Composable
-fun StateOption(price: String = "0.00"){ // State Option and Sales Tax Calculations.
+fun StateOption(price: String = "0.00", discount: String = "0.00"){ // State Option and Sales Tax Calculations.
     Surface(
         modifier = Modifier.fillMaxWidth(),
         color = MaterialTheme.colorScheme.background
@@ -254,7 +267,8 @@ fun StateOption(price: String = "0.00"){ // State Option and Sales Tax Calculati
                         }
                         keyboardController?.hide()
                     },
-                        onNext = { // when the user taps the other outlined text field
+
+                        /*onNext = { // when the user taps the other outlined text field
                             Log.i("ZIPINPUT", zipcode)
                             getTaxes(zipcode) {resultTax ->
                                 tax = resultTax
@@ -262,11 +276,13 @@ fun StateOption(price: String = "0.00"){ // State Option and Sales Tax Calculati
                                 donePressed = true
                             }
                             keyboardController?.hide()
-                        }) {
+                        }*/) {
 
                     },
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                    modifier = Modifier.fillMaxWidth().padding(end = 32.dp)
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(end = 32.dp)
                 )
             }
 
@@ -291,7 +307,10 @@ fun StateOption(price: String = "0.00"){ // State Option and Sales Tax Calculati
                         trailingIcon = {
                             ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
                         },
-                        modifier = Modifier.fillMaxWidth().padding(end = 32.dp).menuAnchor(),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(end = 32.dp)
+                            .menuAnchor(),
                         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
 
                     )
@@ -317,12 +336,12 @@ fun StateOption(price: String = "0.00"){ // State Option and Sales Tax Calculati
 
             if (zipcodeOption and donePressed)
             {
-                Total(price, tax)
+                Total(price, tax, discount)
                 donePressed = false
             }
             else
             {
-                Total(price, selectedTaxRates.toString())
+                Total(price, selectedTaxRates.toString(), discount)
             }
 
         }
@@ -332,11 +351,12 @@ fun StateOption(price: String = "0.00"){ // State Option and Sales Tax Calculati
 
 @Preview(showBackground = true)
 @Composable
-fun Total(text: String = "0.00", tax: String = "0.0") { // Sales Tax Calculation
+fun Total(text: String = "0.00", tax: String = "0.0", discount: String = "0.0") { // Sales Tax Calculation
     val input = text
     var total = 0.00
     //var tax = tax.toDouble()
     var taxTotal = 0.0
+    var discount = discount
 
     Log.i("TAX CURRENTLY", tax)
 
@@ -350,8 +370,12 @@ fun Total(text: String = "0.00", tax: String = "0.0") { // Sales Tax Calculation
         }
         else
         {
-            taxTotal = (input.toDouble() * (tax.toDouble()))
-            total = input.toDouble() + taxTotal
+            if (discount.isEmpty())
+                discount = "0.0"
+
+            total = (input.toDouble() - (input.toDouble() * (discount.toDouble() / 100)))
+            taxTotal = total * (tax.toDouble())
+            total += taxTotal
             Log.i("TOTAL AFTER TAX", total.toString())
         }
 
