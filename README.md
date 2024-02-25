@@ -19,10 +19,10 @@ The zip code option requires an internet connection (either through wifi or mobi
 *Is the sales tax applied before or after the discount?*  
 It is generally applied **after** the discount. I am following this article on the topic of discounts: https://www.taxjar.com/blog/calculations/2021-12-sales-tax-discounts-coupons-promotions  
   
-*What API is being used to get up-to-date sales taxes?*
+*What API is being used to get up-to-date sales taxes?*  
 The API used to get sales tax data: https://api-ninjas.com/api/salestax  
   
-*Can it calculate taxes for items with specific imposed taxes on it?*
+*Can it calculate taxes for items with specific imposed taxes on it?*  
 Neither option will calculate taxes for cases other than the three taxes listed above such as VAT, Excise Taxes, etc. The purpose of this app is to calculate sales taxes of general goods and merchandises that you can find in stores or online.
   
   
