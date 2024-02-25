@@ -23,7 +23,7 @@ It is generally applied **after** the discount. I am following this article on t
 The API used to get sales tax data: https://api-ninjas.com/api/salestax  
   
 *Can it calculate taxes for items with specific imposed taxes on it?*  
-Neither option will calculate taxes for cases other than the three taxes listed above such as VAT, Excise Taxes, etc. The purpose of this app is to calculate sales taxes of general goods and merchandises that you can find in stores or online.
+Neither option will calculate taxes for specific cases where an item or good has a special tax such as VAT, Excise Taxes, etc. The purpose of this app is to calculate sales taxes of general goods and merchandises that you can find in stores or online.
   
   
 <img src="https://github.com/mylifeisoofed/Sales-Tax-Calculator/assets/58831022/ac4be57b-790d-4d69-b241-ce59ed9e864a" width="400">
