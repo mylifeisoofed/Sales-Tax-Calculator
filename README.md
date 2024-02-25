@@ -12,17 +12,20 @@ If you ever go grocery shopping and want to figure out how much you will be payi
 ## State Dropdown Selection Option
 **The US State Selection Option does not take into account Local and other taxes that are added to state taxes and should be used to approximate your total.**  
   
-  
+## QnA
 *So then why keep both options?*  
 The zip code option requires an internet connection (either through wifi or mobile data) while the US State Option does not. Therefore, if you do not have an internet connection, then the option to approximate your sales taxes is available for you. If you do have connection, it is highly recommended to use the zip code option.
 
 *Is the sales tax applied before or after the discount?*  
 It is generally applied **after** the discount. I am following this article on the topic of discounts: https://www.taxjar.com/blog/calculations/2021-12-sales-tax-discounts-coupons-promotions  
-
+  
+*What API is being used to get up-to-date sales taxes?*
 The API used to get sales tax data: https://api-ninjas.com/api/salestax  
-
-Neither option will calculate taxes for cases other than the three taxes listed above such as VAT, Excise Taxes, etc.
-
+  
+*Can it calculate taxes for items with specific imposed taxes on it?*
+Neither option will calculate taxes for cases other than the three taxes listed above such as VAT, Excise Taxes, etc. The purpose of this app is to calculate sales taxes of general goods and merchandises that you can find in stores or online.
+  
+  
 <img src="https://github.com/mylifeisoofed/Sales-Tax-Calculator/assets/58831022/ac4be57b-790d-4d69-b241-ce59ed9e864a" width="400">
 
 TODO:
