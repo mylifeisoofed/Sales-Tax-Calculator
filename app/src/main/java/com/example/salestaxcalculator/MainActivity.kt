@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -37,7 +38,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
@@ -162,10 +166,21 @@ fun Credits() {
 fun SmallTopAppBar() { // A small app bar that will be placed at the top of the app.
     TopAppBar(
         title = {
-            Text(
-                "Sales Tax Calculator",
-                maxLines = 1
-            )
+            Row(modifier = Modifier,
+                verticalAlignment = Alignment.CenterVertically,
+            ){
+                Image(
+                    painter = painterResource(id = R.drawable.app_icon),
+                    contentDescription = "App Icon Image",
+                    modifier = Modifier.size(50.dp)
+                )
+                Spacer(modifier = Modifier.width(15.dp))
+                Text(
+                    "Sales Tax Calculator",
+                    maxLines = 1
+                )
+            }
+
         },
         colors = TopAppBarDefaults.topAppBarColors(
             containerColor = MaterialTheme.colorScheme.primaryContainer,
@@ -258,7 +273,7 @@ fun StateOption(price: String = "0.00", discount: String = "0.00"){ // State Opt
                         fontSize = 12.sp
                     ) },
                     singleLine = true,
-                    keyboardActions = KeyboardActions(onDone = { // when user taps done
+                    keyboardActions = KeyboardActions(onDone = { // when user taps done, call the tax api
                         Log.i("ZIPINPUT", zipcode)
                         getTaxes(zipcode) {resultTax ->
                             tax = resultTax
