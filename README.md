@@ -1,5 +1,4 @@
-# Sales Tax Calculator Android App
-
+# <img src="https://github.com/mylifeisoofed/Sales-Tax-Calculator/assets/58831022/6ee11dff-b3d3-4ee7-af5a-d78f5379e0b6" width="50" height="50"> Sales Tax Calculator Android App  
 This is a simple state sales tax calculator app I made in Android Studio written in Kotlin utilizing Jetpack Compose UI Framework.
 
 If you ever go grocery shopping and want to figure out how much you will be paying sales taxes, simply enter the price tag, enter your zip code (or select a US State with Sales Taxes for an approximation) and the app will calculate the tax and total after applying sales tax! 
