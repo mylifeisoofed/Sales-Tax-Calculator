@@ -16,6 +16,9 @@ If you ever go grocery shopping and want to figure out how much you will be payi
 *So then why keep both options?*  
 The zip code option requires an internet connection (either through wifi or mobile data) while the US State Option does not. Therefore, if you do not have an internet connection, then the option to approximate your sales taxes is available for you. If you do have connection, it is highly recommended to use the zip code option.
 
+*Is the sales tax applied before or after the discount?*  
+It is generally applied **after** the discount. I am following this article on the topic of discounts: https://www.taxjar.com/blog/calculations/2021-12-sales-tax-discounts-coupons-promotions  
+
 The API used to get sales tax data: https://api-ninjas.com/api/salestax  
 
 Neither option will calculate taxes for cases other than the three taxes listed above such as VAT, Excise Taxes, etc.
