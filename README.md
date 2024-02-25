@@ -26,7 +26,7 @@ The API used to get sales tax data: https://api-ninjas.com/api/salestax
 Neither option will calculate taxes for specific cases where an item or good has a special tax such as VAT, Excise Taxes, etc. The purpose of this app is to calculate sales taxes of general goods and merchandises that you can find in stores or online.
   
   
-<img src="https://github.com/mylifeisoofed/Sales-Tax-Calculator/assets/58831022/ac4be57b-790d-4d69-b241-ce59ed9e864a" width="400">
+<img src="https://github.com/mylifeisoofed/Sales-Tax-Calculator/assets/58831022/9a42a632-a1be-40d6-b055-0457869d1561" width="400">
 
 TODO:
 - ~~Implement a selection option for users to select states that have sales taxes.~~
