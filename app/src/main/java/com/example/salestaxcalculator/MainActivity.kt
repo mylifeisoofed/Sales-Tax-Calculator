@@ -379,15 +379,14 @@ fun Total(text: String = "0.00", tax: String = "0.0", discount: String = "0.0") 
     Surface (
         modifier = Modifier.fillMaxWidth()
     ){
+        if (discount.isEmpty() || !isDecimal(discount))
+            discount = "0.0"
+
         if (input.isEmpty() || !isDecimal(input)) // checking input.
-        {
             total = 0.00
-        }
+
         else
         {
-            if (discount.isEmpty())
-                discount = "0.0"
-
             total = (input.toDouble() - (input.toDouble() * (discount.toDouble() / 100)))
             taxTotal = total * (tax.toDouble())
             total += taxTotal
