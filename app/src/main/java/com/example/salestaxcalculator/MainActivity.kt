@@ -221,7 +221,7 @@ fun Price(modifier: Modifier = Modifier) { // Text Input for Price and will call
             },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
         )
-        Spacer(modifier = Modifier.height(100.dp))
+        Spacer(modifier = Modifier.height(75.dp))
         StateOption(text, discount)
         //Total(text)
         Log.i("PRICE", text)
@@ -369,7 +369,7 @@ fun StateOption(price: String = "0.00", discount: String = "0.00"){ // State Opt
 fun Total(text: String = "0.00", tax: String = "0.0", discount: String = "0.0") { // Sales Tax Calculation
     val input = text
     var total = 0.00
-    //var tax = tax.toDouble()
+    var taxDouble = tax.toDouble() * 100
     var taxTotal = 0.0
     var discount = discount
 
@@ -385,6 +385,7 @@ fun Total(text: String = "0.00", tax: String = "0.0", discount: String = "0.0") 
         if (input.isEmpty() || !isDecimal(input)) // checking input.
             total = 0.00
 
+
         else
         {
             total = (input.toDouble() - (input.toDouble() * (discount.toDouble() / 100)))
@@ -393,8 +394,20 @@ fun Total(text: String = "0.00", tax: String = "0.0", discount: String = "0.0") 
             Log.i("TOTAL AFTER TAX", total.toString())
         }
 
+
         Column (modifier = Modifier,
             verticalArrangement = Arrangement.SpaceEvenly){
+            Row(horizontalArrangement = Arrangement.Start
+            ){
+                Text("Tax Rate",
+                    textAlign = TextAlign.Start,
+                    fontSize = 32.sp)
+
+                Spacer(modifier = Modifier.width(23.dp))
+
+                Text(text = "%.2f".format(taxDouble) + "%",
+                    fontSize = 32.sp)
+            }
             Row(
                 horizontalArrangement = Arrangement.Start
             ) {
