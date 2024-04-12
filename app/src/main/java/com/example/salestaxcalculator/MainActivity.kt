@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,6 +17,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.DropdownMenuItem
@@ -80,7 +84,7 @@ class MainActivity : ComponentActivity() {
                                 modifier = Modifier.padding(innerPadding),
                                 horizontalAlignment = Alignment.CenterHorizontally
                             ) {
-                                Spacer(modifier = Modifier.height(50.dp))
+                                //Spacer(modifier = Modifier.height(5.dp))
                                 SalesTax() // the sales tax stuff
                                 //Credits()
                             }
@@ -210,7 +214,7 @@ fun Price(modifier: Modifier = Modifier) { // Text Input for Price and will call
             },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
         )
-        Spacer(modifier = Modifier.height(25.dp))
+        Spacer(modifier = Modifier.height(10.dp))
         OutlinedTextField(value = discount,
             onValueChange = { discount = it },
             modifier = Modifier,
@@ -221,7 +225,7 @@ fun Price(modifier: Modifier = Modifier) { // Text Input for Price and will call
             },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
         )
-        Spacer(modifier = Modifier.height(75.dp))
+        Spacer(modifier = Modifier.height(40.dp))
         StateOption(text, discount)
         //Total(text)
         Log.i("PRICE", text)
@@ -301,7 +305,7 @@ fun StateOption(price: String = "0.00", discount: String = "0.00"){ // State Opt
                 )
             }
 
-            Row( // US State UI
+            Row( // US State dropdown list
                 modifier = Modifier,
                 horizontalArrangement = Arrangement.SpaceEvenly,
             ){
@@ -333,17 +337,23 @@ fun StateOption(price: String = "0.00", discount: String = "0.00"){ // State Opt
                     ExposedDropdownMenu(expanded = expanded,
                         onDismissRequest = { expanded = false }
                     ) {
-                        stateOptions.forEach { selectionOption ->
-                            DropdownMenuItem(
-                                text = { Text(text = selectionOption) },
-                                onClick = {
-                                    selectedStateOption = selectionOption
-                                    selectedTaxRates = taxRates[selectionOption] ?: "0.0"
-                                    expanded = false
-                                },
-                            )
+                        LazyColumn(
+                            modifier = Modifier.width(500.dp).height(1000.dp)
+                            ){
+                            items(stateOptions) { selectionOption ->
+                                DropdownMenuItem(
+                                    text = { Text(text = selectionOption) },
+                                    onClick = {
+                                        selectedStateOption = selectionOption
+                                        selectedTaxRates = taxRates[selectionOption] ?: "0.0"
+                                        expanded = false
+                                    },
+                                )
+                            }
                         }
+
                     }
+
                 }
             }
 
@@ -372,6 +382,7 @@ fun Total(text: String = "0.00", tax: String = "0.0", discount: String = "0.0") 
     var taxDouble = tax.toDouble() * 100
     var taxTotal = 0.0
     var discount = discount
+    var saved = 0.0
 
     Log.i("TAX CURRENTLY", tax)
 
@@ -388,7 +399,9 @@ fun Total(text: String = "0.00", tax: String = "0.0", discount: String = "0.0") 
 
         else
         {
-            total = (input.toDouble() - (input.toDouble() * (discount.toDouble() / 100)))
+            saved = (input.toDouble() * (discount.toDouble() / 100)) // discount savings
+            //total = (input.toDouble() - (input.toDouble() * (discount.toDouble() / 100)))
+            total = (input.toDouble() - saved)
             taxTotal = total * (tax.toDouble())
             total += taxTotal
             Log.i("TOTAL AFTER TAX", total.toString())
@@ -397,8 +410,20 @@ fun Total(text: String = "0.00", tax: String = "0.0", discount: String = "0.0") 
 
         Column (modifier = Modifier,
             verticalArrangement = Arrangement.SpaceEvenly){
+            Row(horizontalArrangement = Arrangement.Start) {
+                Text("Saved",
+                    textAlign = TextAlign.Start,
+                    fontSize = 32.sp)
+
+                Spacer(modifier = Modifier.width(60.dp))
+
+                Text("$%.2f".format(saved),
+                    textAlign = TextAlign.Start,
+                    fontSize = 32.sp)
+            }
             Row(horizontalArrangement = Arrangement.Start
             ){
+
                 Text("Tax Rate",
                     textAlign = TextAlign.Start,
                     fontSize = 32.sp)
