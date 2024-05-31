@@ -2,6 +2,7 @@ package com.example.salestaxcalculator
 
 import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -22,6 +23,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
@@ -52,6 +54,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.viewinterop.AndroidView
 import com.example.salestaxcalculator.ui.theme.SalesTaxCalculatorTheme
 import retrofit2.Call
 import retrofit2.Callback
@@ -60,14 +63,17 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.lang.NumberFormatException
 import com.example.salestaxcalculator.*
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdSize
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
+import java.util.concurrent.atomic.AtomicBoolean
 
 
 var url = "https://api.api-ninjas.com/"
 
 
 class MainActivity : ComponentActivity() {
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -79,6 +85,14 @@ class MainActivity : ComponentActivity() {
                 ) {
                     Scaffold(
                         topBar = { SmallTopAppBar() },
+                        bottomBar = {
+                                    BottomAppBar(
+                                        containerColor = MaterialTheme.colorScheme.primaryContainer,
+                                        contentColor = MaterialTheme.colorScheme.primary
+                                    ) {
+                                        BannerAd()
+                                    }
+                        },
                         content = { innerPadding ->
                             Column(
                                 modifier = Modifier.padding(innerPadding),
@@ -86,14 +100,14 @@ class MainActivity : ComponentActivity() {
                             ) {
                                 //Spacer(modifier = Modifier.height(5.dp))
                                 SalesTax() // the sales tax stuff
-                                //Credits()
+                                Credits()
                             }
                         }
                     )
-                    Credits()
                 }
             }
         }
+
     }
 
 }
@@ -158,7 +172,7 @@ fun Credits() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "Made by Brian!",
+            text = "Made by Brian Le!",
         )
         Spacer(modifier = Modifier.height(10.dp))
     }
@@ -225,7 +239,7 @@ fun Price(modifier: Modifier = Modifier) { // Text Input for Price and will call
             },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
         )
-        Spacer(modifier = Modifier.height(40.dp))
+        Spacer(modifier = Modifier.height(10.dp))
         StateOption(text, discount)
         //Total(text)
         Log.i("PRICE", text)
@@ -279,11 +293,17 @@ fun StateOption(price: String = "0.00", discount: String = "0.00"){ // State Opt
                     singleLine = true,
                     keyboardActions = KeyboardActions(onDone = { // when user taps done, call the tax api
                         Log.i("ZIPINPUT", zipcode)
-                        getTaxes(zipcode) {resultTax ->
-                            tax = resultTax
-                            Log.i("TAX RETRIEVED", tax)
-                            donePressed = true
+                        if (zipcode.length == 5) {
+                            getTaxes(zipcode) {resultTax ->
+                                tax = resultTax
+                                Log.i("TAX RETRIEVED", tax)
+                                donePressed = true
+                            }
+                            Log.i("ZIPINPUT", "VALID ZIP")
                         }
+                        else
+                            Log.i("ZIPINPUT", "INVALID ZIP")
+
                         keyboardController?.hide()
                     },
 
@@ -338,7 +358,9 @@ fun StateOption(price: String = "0.00", discount: String = "0.00"){ // State Opt
                         onDismissRequest = { expanded = false }
                     ) {
                         LazyColumn(
-                            modifier = Modifier.width(500.dp).height(1000.dp)
+                            modifier = Modifier
+                                .width(500.dp)
+                                .height(1000.dp)
                             ){
                             items(stateOptions) { selectionOption ->
                                 DropdownMenuItem(
@@ -478,4 +500,21 @@ fun isDecimal(text: String): Boolean { // have to create my own decimal check vi
     }
     return true
 }
+
+@Preview(showBackground = true)
+@Composable
+fun BannerAd(modifier: Modifier = Modifier) {
+    AndroidView(
+        modifier = modifier.fillMaxWidth(),
+        factory = {
+        AdView(it).apply {
+            setAdSize(AdSize.BANNER)
+            adUnitId = "ca-app-pub-4168857671507421/6525729259"
+            loadAd(AdRequest.Builder().build())
+        }
+    })
+}
+
+
+
 
