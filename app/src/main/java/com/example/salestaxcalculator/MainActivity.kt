@@ -1,4 +1,4 @@
-package com.example.salestaxcalculator
+package com.riceroll.salestaxcalculator
 
 import android.content.ContentValues.TAG
 import android.os.Bundle
