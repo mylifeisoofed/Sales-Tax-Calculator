@@ -33,5 +33,6 @@ TODO:
 - ~~Implement a selection option for users to select states that have sales taxes.~~
 - ~~Maybe look for an API to hook up to grab up-to-date data for each state's sales tax.~~
 - ~~Add a Discount option~~
+- Clean up/Refactor messy code base
 - Make UI look better(?)
 - Give the app a cool name(?)
